@@ -1,0 +1,58 @@
+
+
+<div class="container">
+  <h2>Employee Information</h2>
+         
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Employee Id</th>
+      
+        <th> Role</th>
+          <th> Working Days</th>
+        <th> Vacation Days</th>
+        <th>Modify</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of emplyeeInfo let i = index">
+        <td>{{emp.employeeId}}</td>       
+        <td>{{roleObj[emp.employeeRole]}}</td>
+         
+        <td>{{emp.employeeVacationDays}}</td>
+        <td>{{emp.employeeWorkDays}}</td>
+         <td><span style="cursor:pointer;text-decoration:underline" data-toggle="modal" data-target="#myModal" (click)="getEmployeDetails(emp.employeeId);employeeeObj={}" >Edit</span></td>
+      </tr>
+      
+    </tbody>
+  </table>
+  
+  
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+         Employee Information
+        </div>
+        <div class="modal-body">
+        <div *ngIf="returnFMsg" style="color:red">{{returnFMsg}}</div>
+        <div *ngIf="returnSMsg" style="color:green">{{returnSMsg}}</div>
+        
+        <br/>
+         <div>Employee Id : {{employeeObj.employeeId}}</div>
+          <div>Employee Role : {{roleObj[employeeObj.employeeRole]}}</div>
+           <div>Vacation Days : <input type="text"  [(ngModel)]="employeeObj.employeeVacationDays"/></div>
+            <div>Working Days : <input type="text"  [(ngModel)]="employeeObj.employeeWorkDays"/></div>
+        </div>
+        <div class="modal-footer">
+         <button type="button" class="btn btn-default" (click)="updateEmployeeDetails(employeeObj);">Update</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+      </div>
+  </div>
